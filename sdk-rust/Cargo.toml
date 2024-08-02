@@ -1,0 +1,13 @@
+[package]
+name = "sdk-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anchor-client = { version = "0.30.0 ", features = ["async"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+dotenv = "0.15.0"
+serde_json = "1.0"
+tentacles = "0.1.1"
+actix-web = "4"

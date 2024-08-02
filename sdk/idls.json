@@ -1,0 +1,286 @@
+{
+  "address": "DHf422S4YVbKfMcSTQ1Dkutaftbvm19rx16QBzXdzr3Y",
+  "metadata": {
+    "name": "tentacles",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "initialize_wallet",
+      "discriminator": [
+        213,
+        0,
+        239,
+        240,
+        73,
+        100,
+        188,
+        193
+      ],
+      "accounts": [
+        {
+          "name": "wallet",
+          "writable": true
+        },
+        {
+          "name": "walletTokenAccount",
+          "writable": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "rent"
+        },
+        {
+          "name": "associated_token_program"
+        },
+        {
+          "name": "token_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "total_shares",
+          "type": "u64"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "add_member",
+      "discriminator": [
+        13,
+        116,
+        123,
+        130,
+        126,
+        198,
+        57,
+        34
+      ],
+      "accounts": [
+        {
+          "name": "wallet",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "member",
+          "type": "pubkey"
+        },
+        {
+          "name": "shares",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "distribute",
+      "discriminator": [
+        191,
+        44,
+        223,
+        207,
+        164,
+        236,
+        126,
+        61
+      ],
+      "accounts": [
+        {
+          "name": "wallet",
+          "writable": true
+        },
+        {
+          "name": "program_signer"
+        },
+        {
+          "name": "wallet_token_account",
+          "writable": true
+        },
+        {
+          "name": "wallet_authority",
+          "signer": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "rent"
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "associated_token_program"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "SplitWallet",
+      "discriminator": [
+        213,
+        93,
+        230,
+        188,
+        40,
+        221,
+        207,
+        68
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "BadArtithmetic",
+      "msg": "Encountered an arithmetic error"
+    },
+    {
+      "code": 6001,
+      "name": "DerivedKeyInvalid",
+      "msg": "DerivedKeyInvalid"
+    },
+    {
+      "code": 6002,
+      "name": "MaxMembersReached",
+      "msg": "MaxMembersReached"
+    },
+    {
+      "code": 6003,
+      "name": "NotEnoughAvailableShares",
+      "msg": "NotEnoughAvailableShares"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidAccountData",
+      "msg": "InvalidAccountData"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidArgument",
+      "msg": "InvalidArgument"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidMemberTokenAccount",
+      "msg": "InvalidMemberTokenAccount"
+    }
+  ],
+  "types": [
+    {
+      "name": "MemberInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "member",
+            "type": "pubkey"
+          },
+          {
+            "name": "shares",
+            "type": "u64"
+          },
+          {
+            "name": "disburse_cycles",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SplitWallet",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "tentacles",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_shares",
+            "type": "u64"
+          },
+          {
+            "name": "total_members",
+            "type": "u8"
+          },
+          {
+            "name": "last_inflow",
+            "type": "u64"
+          },
+          {
+            "name": "total_inflow",
+            "type": "u64"
+          },
+          {
+            "name": "token_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "last_snapshot_amount",
+            "type": "u64"
+          },
+          {
+            "name": "bump_seed",
+            "type": "u8"
+          },
+          {
+            "name": "total_available_shares",
+            "type": "u64"
+          },
+          {
+            "name": "members",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "MemberInfo"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
