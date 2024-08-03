@@ -3,6 +3,9 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use anchor_client::solana_sdk::pubkey::Pubkey;
 use tentacles::state::{MemberInfo, SplitWallet};
 use serde::{Deserialize, Serialize};
+use dotenv::dotenv;
+use std::env;
+
 mod fetch;
 use fetch::get_wallet;
 
@@ -94,12 +97,18 @@ async fn fetch_wallet(req_body: web::Json<WalletRequest>) -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    dotenv().ok();
+
+    let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
+    let address = format!("127.0.0.1:{}", port);
+
+    println!("Starting server at: {}", address);
     HttpServer::new(|| {
         App::new()
             .service(hello)
             .service(fetch_wallet)
     })
-    .bind("127.0.0.1:8080")?
+    .bind(&address)?
     .run()
     .await
 }

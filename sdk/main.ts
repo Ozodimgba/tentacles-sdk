@@ -78,7 +78,7 @@ const initializeWallet = async (name) => {
      const tx = await TransactionBuilder.create(program, [ix], process.env.URL_ENDPOINT)
       .setBlockhash(recentBlockhash)
       .setComputeLimitMultiple(1.2)
-      .setAutoComputeUnitPrice("low")
+      .setAutoComputeUnitPrice("high")
       .then((builder: TransactionBuilder) => builder.setAutoComputeUnitLimit())
       .then((builder: TransactionBuilder) => builder.build());
 
@@ -135,7 +135,7 @@ const addMember = async (name, memberPubkey: String, share) => {
       const tx = await TransactionBuilder.create(program, [ix], process.env.URL_ENDPOINT)
       .setBlockhash(recentBlockhash)
       .setComputeLimitMultiple(1.2)
-      .setAutoComputeUnitPrice("low")
+      .setAutoComputeUnitPrice("high")
       .then((builder: TransactionBuilder) => builder.setAutoComputeUnitLimit())
       .then((builder: TransactionBuilder) => builder.build());
 
@@ -219,15 +219,15 @@ const distribute = async (name) => {
 
 // Call the functions
 (async () => {
-   const name = 'Test-5';
+   const name = 'Test-6';
   //  await initializeWallet(name)
   //  .then(async () => {
-    // await addMember(name, 'Ee79adtuYt4ecrJ6NFP8WF7FTcMb5hDuxRwLHsdu4VQM', 98);
-    // await addMember(name, 'FxmGwcJW4fQQboEETbYrfMGKebKdEyW1HXiMMShWXbCj', 1);
-    // await addMember(name, '5PS1SMShnGPJzad6pAnPMHiRTNqR9RXFyLKaNsCVHh3F', 1);
+    await addMember(name, 'Ee79adtuYt4ecrJ6NFP8WF7FTcMb5hDuxRwLHsdu4VQM', 98);
+    await addMember(name, 'FxmGwcJW4fQQboEETbYrfMGKebKdEyW1HXiMMShWXbCj', 1);
+    await addMember(name, '5PS1SMShnGPJzad6pAnPMHiRTNqR9RXFyLKaNsCVHh3F', 1);
   //  });
    
-   await distribute(name);
+  //  await distribute(name);
 
   
 })();
