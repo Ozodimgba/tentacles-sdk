@@ -100,7 +100,7 @@ async fn main() -> std::io::Result<()> {
     dotenv().ok();
 
     let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
-    let address = format!("127.0.0.1:{}", port);
+    let address = format!("0.0.0.0:{}", port);
 
     println!("Starting server at: {}", address);
     HttpServer::new(|| {

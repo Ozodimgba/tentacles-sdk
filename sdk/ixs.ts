@@ -5,7 +5,7 @@ import bs58 from 'bs58';
 // Load the IDL
 import { Tentacles as Idl } from './idl'
 import idl from './idl.json'
-import { TransactionBuilder } from './x';
+import { TransactionBuilder } from './engine';
 import * as dotenv from 'dotenv';
 
 dotenv.config()
@@ -33,7 +33,7 @@ const program = new anchor.Program(idl as Idl, provider)
 // Define the accounts
 const mint = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
 
-const initializeWallet = async (name) => {
+export const initializeWallet = async (name) => {
 
   try {
     const [walletPda, bump] = await PublicKey.findProgramAddress(
@@ -91,7 +91,7 @@ const initializeWallet = async (name) => {
   }
 };
 
-const addMember = async (name, memberPubkey: String, share) => {
+export const addMember = async (name, memberPubkey: String, share) => {
   try {
     const shares = new anchor.BN(share);
     const member = new PublicKey(memberPubkey); // Replace with the actual member public key
@@ -149,7 +149,7 @@ const addMember = async (name, memberPubkey: String, share) => {
   }
 };
 
-const distribute = async (name) => {
+export const distribute = async (name) => {
   const [walletPda, bump] = await PublicKey.findProgramAddress(
     [Buffer.from('split_wallet'), Buffer.from(name)],
     programId
@@ -217,17 +217,17 @@ const distribute = async (name) => {
 
 
 
-// Call the functions
-(async () => {
-   const name = 'Test-6';
-  //  await initializeWallet(name)
-  //  .then(async () => {
-    await addMember(name, 'Ee79adtuYt4ecrJ6NFP8WF7FTcMb5hDuxRwLHsdu4VQM', 98);
-    await addMember(name, 'FxmGwcJW4fQQboEETbYrfMGKebKdEyW1HXiMMShWXbCj', 1);
-    await addMember(name, '5PS1SMShnGPJzad6pAnPMHiRTNqR9RXFyLKaNsCVHh3F', 1);
-  //  });
+// // Call the functions
+// (async () => {
+//    const name = 'Test-6';
+//   //  await initializeWallet(name)
+//   //  .then(async () => {
+//     await addMember(name, 'Ee79adtuYt4ecrJ6NFP8WF7FTcMb5hDuxRwLHsdu4VQM', 98);
+//     await addMember(name, 'FxmGwcJW4fQQboEETbYrfMGKebKdEyW1HXiMMShWXbCj', 1);
+//     await addMember(name, '5PS1SMShnGPJzad6pAnPMHiRTNqR9RXFyLKaNsCVHh3F', 1);
+//   //  });
    
-  //  await distribute(name);
+//   //  await distribute(name);
 
   
-})();
+// })();
