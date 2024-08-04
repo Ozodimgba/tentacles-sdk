@@ -99,16 +99,15 @@ async fn fetch_wallet(req_body: web::Json<WalletRequest>) -> impl Responder {
 async fn main() -> std::io::Result<()> {
     dotenv().ok();
 
-    let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
-    let address = format!("0.0.0.0:{}", port);
+    let port = env::var("PORT").expect("Missing port number");
+    let port = port.parse::<u16>().expect("Invalid port given");
 
-    println!("Starting server at: {}", address);
     HttpServer::new(|| {
         App::new()
             .service(hello)
             .service(fetch_wallet)
     })
-    .bind(&address)?
+    .bind(("0.0.0.0", port))?
     .run()
     .await
 }
