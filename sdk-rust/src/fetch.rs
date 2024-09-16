@@ -15,7 +15,7 @@ pub async fn get_wallet(
     dotenv().ok();
     let payer_sk = env::var("PAYER_BASE58").expect("PAYER_BASE58 must be set in .env file");
     let payer = Keypair::from_base58_string(&payer_sk);
-    let client = Client::new(Cluster::Mainnet, Rc::new(payer));
+    let client = Client::new(Cluster::Devnet, Rc::new(payer));
 
     // Create program
     let program = client.program(tentacles::ID).unwrap();
