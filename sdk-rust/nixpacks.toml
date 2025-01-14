@@ -7,3 +7,9 @@ aptPkgs = [
 
 [start]
 cmd = "cargo run --release"
+
+[environment]
+PORT = "3000"
+
+[[environment.production]]
+PORT = "${PORT}"
