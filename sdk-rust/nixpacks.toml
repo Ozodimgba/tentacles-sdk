@@ -5,16 +5,5 @@ aptPkgs = [
     "build-essential"
 ]
 
-[phases.install]
-cmds = [
-    "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y",
-    ". $HOME/.cargo/env"
-]
-
-[phases.build]
-cmds = [
-    "cargo build --release"
-]
-
 [start]
-cmd = "./target/release/sdk-rust"
+cmd = "cargo run --release"
